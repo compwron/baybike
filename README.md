@@ -3,7 +3,12 @@ Poking around with the data set from https://bayareabikeshare.com/datachallenge
 assuming installed and running mongo:
 
 import data to mongo:
-```mongoimport -d baybike -c trips --type csv --file 201402_trip_data.csv --headerline```
+```mongoimport -d baybike -c trips --type csv --file 201402_trip_data.csv --headerline
+mongoimport -d baybike -c station --type csv --file 201402_station_data.csv --headerline
+mongoimport -d baybike -c weather --type csv --file 201402_weather_data.csv --headerline
+mongoimport -d baybike -c rebalancing --type csv --file 201402_rebalancing_data.csv --headerline
+
+```
 
 open mongo:
 ```mongo```
