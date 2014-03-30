@@ -1,0 +1,1 @@
+cat 201402_trip_data.csv | cut -d, -f3,4,7,10 | grep Subscriber | cut -d, -f2,3 | sort | uniq -c | sort -rn

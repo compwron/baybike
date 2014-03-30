@@ -32,10 +32,23 @@ db.trips.find().pretty()
 ```
 # Questions we have about the data
 
-## Currently in progress: 
+## Currently in progress:
 * day of week that bikes are most used?
+* most frequent subscriber routes
+```
+1253 Townsend at 7th,San Francisco Caltrain (Townsend at 4th)
+1044 San Francisco Caltrain 2 (330 Townsend),Townsend at 7th
+ 820 Market at Sansome,2nd at South Park
+ 763 2nd at South Park,Market at Sansome
+ 680 San Francisco Caltrain (Townsend at 4th),Harry Bridges Plaza (Ferry Building)
+ 678 San Francisco Caltrain (Townsend at 4th),Embarcadero at Folsom
+ 673 Embarcadero at Sansome,Steuart at Market
+ 621 2nd at Townsend,Harry Bridges Plaza (Ferry Building)
+ 620 San Francisco Caltrain (Townsend at 4th),Temporary Transbay Terminal (Howard at Beale)
+ 609 Steuart at Market,2nd at Townsend
+```
 
-## Finished: 
+## Finished:
 * bike id with most trips: id: 510, count: 482
 * Most used day was: Thursday with usage of: 25265
 
@@ -51,7 +64,7 @@ db.trips.find().pretty()
 * Hour with most bikes checked out per day
 * find allday rentals
 * Find the usage of bikes on the day with worst weather
-* bike station affinity rating per bike 
+* bike station affinity rating per bike
 * bike that's moved the least
 * hottest day, coldest day, see how many rentals are on that day
 * At what temperature are the most bike trips taken
