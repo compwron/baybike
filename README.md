@@ -53,11 +53,13 @@ Count: 	 621 	 Start: 2nd at Townsend 	 End: Harry Bridges Plaza (Ferry Building
 Count: 	 620 	 Start: San Francisco Caltrain (Townsend at 4th) 	 End: Temporary Transbay Terminal (Howard at Beale)
 Count: 	 609 	 Start: Steuart at Market 	 End: 2nd at Townsend
 ```
-## To Do:
 * days with fewest rentals (what is the number of rentals on the day with the smallest rentals?)
 * most used, least used bike
 * day with fewest trips
 * least often used bike id
+
+## To Do:
+
 * average lifetime of bikes
 * spread of most-used and least-used bikes
 * longest checked out bike
