@@ -29,31 +29,29 @@
 
 		$.get('results.csv', function(data) {
 			var routes = $.csv.toObjects(data);
-			for(var route in routes) {
-				$.each(route, function(i, route) {
-					L.mapbox.featureLayer({
-						type: 'Feature',
-						geometry: {
-							type: 'Point',
-							coordinates: [route.start_long,route.start_lat]
-						},
-						properties: {
-							title: route.start,
-							'marker-color': '#7ec9b1'
-						}
-					}).addTo(map);
-					L.mapbox.featureLayer({
-						geometry: {
-							type: 'Point',
-							coordinates: [route.end_long,route.end_lat]
-						},
-						properties:  {
-							title: route.end,
-							'marker-color': '#f86767'
-						}
-					}).addTo(map);
-				})
-			}
+			$.each(route, function(i, route) {
+				L.mapbox.featureLayer({
+					type: 'Feature',
+					geometry: {
+						type: 'Point',
+						coordinates: [route.start_long,route.start_lat]
+					},
+					properties: {
+						title: route.start,
+						'marker-color': '#7ec9b1'
+					}
+				}).addTo(map);
+				L.mapbox.featureLayer({
+					geometry: {
+						type: 'Point',
+						coordinates: [route.end_long,route.end_lat]
+					},
+					properties:  {
+						title: route.end,
+						'marker-color': '#f86767'
+					}
+				}).addTo(map);
+			})
 		})
 	</script>
 </body>
