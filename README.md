@@ -36,24 +36,23 @@ db.trips.find().pretty()
 
 ## Currently in progress:
 * day of week that bikes are most used?
-* most frequent subscriber routes
-```
-1253 Townsend at 7th,San Francisco Caltrain (Townsend at 4th)
-1044 San Francisco Caltrain 2 (330 Townsend),Townsend at 7th
- 820 Market at Sansome,2nd at South Park
- 763 2nd at South Park,Market at Sansome
- 680 San Francisco Caltrain (Townsend at 4th),Harry Bridges Plaza (Ferry Building)
- 678 San Francisco Caltrain (Townsend at 4th),Embarcadero at Folsom
- 673 Embarcadero at Sansome,Steuart at Market
- 621 2nd at Townsend,Harry Bridges Plaza (Ferry Building)
- 620 San Francisco Caltrain (Townsend at 4th),Temporary Transbay Terminal (Howard at Beale)
- 609 Steuart at Market,2nd at Townsend
-```
 
 ## Finished:
 * bike id with most trips: id: 510, count: 482
 * Most used day was: Thursday with usage of: 25265
-
+* Most frequent subscriber routes
+```
+Count: 	 1253 	 Start: Townsend at 7th 	 End: San Francisco Caltrain (Townsend at 4th)
+Count: 	 1044 	 Start: San Francisco Caltrain 2 (330 Townsend) 	 End: Townsend at 7th
+Count: 	 820 	 Start: Market at Sansome 	 End: 2nd at South Park
+Count: 	 763 	 Start: 2nd at South Park 	 End: Market at Sansome
+Count: 	 680 	 Start: San Francisco Caltrain (Townsend at 4th) 	 End: Harry Bridges Plaza (Ferry Building)
+Count: 	 678 	 Start: San Francisco Caltrain (Townsend at 4th) 	 End: Embarcadero at Folsom
+Count: 	 673 	 Start: Embarcadero at Sansome 	 End: Steuart at Market
+Count: 	 621 	 Start: 2nd at Townsend 	 End: Harry Bridges Plaza (Ferry Building)
+Count: 	 620 	 Start: San Francisco Caltrain (Townsend at 4th) 	 End: Temporary Transbay Terminal (Howard at Beale)
+Count: 	 609 	 Start: Steuart at Market 	 End: 2nd at Townsend
+```
 ## To Do:
 * days with fewest rentals (what is the number of rentals on the day with the smallest rentals?)
 * most used, least used bike
