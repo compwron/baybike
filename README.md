@@ -40,7 +40,7 @@ db.trips.find().pretty()
 ## Finished:
 * bike id with most trips: id: 510, count: 482
 * Most used day was: Thursday with usage of: 25265
-* Most frequent subscriber routes
+* Most frequent subscriber routes - [See it on a map](http://compwron.github.io/baybike/map.html)
 ```
 Count: 	 1253 	 Start: Townsend at 7th 	 End: San Francisco Caltrain (Townsend at 4th)
 Count: 	 1044 	 Start: San Francisco Caltrain 2 (330 Townsend) 	 End: Townsend at 7th
