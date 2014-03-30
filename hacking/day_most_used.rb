@@ -1,22 +1,30 @@
 require 'date'
 
-trips = '201402_trip_data.csv'
+# trips = '201402_trip_data.csv'
+trips = 'data/201402_trip_data.csv'
 
 days = {}
 
-File.open(trips).each_with_index { |line, index|
-	unless index == 0
-    	plain_date = line.split(',')[2].split(' ')[0]
-    	dow = DateTime.strptime(plain_date, '%m/%d/%Y').strftime('%A')
-
-    	days[dow].nil? ? days[dow] = 1 : days[dow] += 1
-	end
+dates = File.open(trips).map { |line|
+  	plain_date = line.split(',')[2].split(' ')[0]
+}.drop(1).map{|date| 
+	DateTime.strptime(date, '%m/%d/%Y')
 }
 
-max_usage_dow = days.max_by{ |pair| 
-	pair.last
+unique_dates = dates.uniq.sort
+
+count_per_day = unique_dates.map{|unique_date|
+	[unique_date, dates.select{|date| date == unique_date}.count] # this takes too long
 }
 
-puts "Most used day was: #{max_usage_dow.first} with usage of: #{max_usage_dow.last}"
+most = count_per_day.max_by{|per_day| per_day.last}.last
+least = count_per_day.min_by{|per_day| per_day.last}.last
 
-# p days.group_by{ |day| day}
+average_unit = (most - least) / 50
+
+puts "viewing bikes rented per day - average unit"
+
+puts count_per_day.map{ |per_day| 
+	pretty_date = per_day.first.strftime("%m/%d/%Y %a")
+	"#{pretty_date} #{'|' * (per_day.last / average_unit)}"
+}
