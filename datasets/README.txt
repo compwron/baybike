@@ -1,4 +1,4 @@
-﻿FILE LIST
+FILE LIST
 1) 201402_rebalancing_data.csv – approx. 17 million records of rebalancing data (bike and dock availability)
 2) 201402_station_data.csv – 69 records – station latitude, longitude, name, dockcount, installation date
 3) 201402_trip_data.csv – approx. 144,000 records of individual trips
