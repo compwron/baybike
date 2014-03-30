@@ -12,6 +12,8 @@ brew install mongo
 * Import data sets to collections
 
 ```
+cd hacking ; ruby mongo_import.rb
+# or:
 mongoimport -d baybike -c trips --type csv --file 201402_trip_data.csv --headerline
 mongoimport -d baybike -c station --type csv --file 201402_station_data.csv --headerline
 mongoimport -d baybike -c weather --type csv --file 201402_weather_data.csv --headerline
