@@ -1,23 +1,33 @@
-# require 'io'
+class String
+  def is_integer?
+    self.to_i.to_s == self
+  end
+end
 
-trips = '201402_trip_data.csv'
+# trips = '201402_trip_data.csv'
+trips = 'data/201402_trip_data.csv'
 
-bike_trips = {}
-largest_id = 0
-largest_count = 0
+ids =  File.open(trips).map { |line, index|
+  line.split(',')[8] unless index == 0
+}.reject { |id|
+  !id.is_integer?
+}.map{|id| id.to_i}
 
-File.open(trips).map { |line|
-    id = line.split(',')[8]
-    # p id
-    bike_trips[id].nil? ? bike_trips[id] = 1 : bike_trips[id] += 1
-}
+unique_ids = ids.uniq.sort
 
-bike_trips.each { |id, count|
-	if (count > largest_count) then 
-		largest_count = count
-		largest_id = id 
-	end
-}
+unique_map = unique_ids.map {|id| {id => 0}}.inject{|a, b| a .merge(b)}
 
-p "largest id: #{largest_id} with count: #{bike_trips[largest_id]}"
+ids.each {|id| unique_map[id] += 1}
 
+max = unique_map.max_by {|id_count| id_count.last}
+min = unique_map.min_by {|id_count| id_count.last}
+
+puts "bike id with largest number of usages: #{max.first} with #{max.last} usages"
+puts "bike id with smallest number of usages: #{min.first} with #{min.last} usages"
+
+least_used = unique_map.sort_by{|id_count| id_count.last}.first(10)
+
+printable_least = least_used.map{|id_count| "bike id: #{id_count.first} - # of usages: #{id_count.last}"}.join("\n")
+
+puts "\nleast-used bikes:"
+puts printable_least
