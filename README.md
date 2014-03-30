@@ -2,6 +2,7 @@
 
 * Poking around with the data set from https://bayareabikeshare.com/datachallenge
 * Download it here https://s3.amazonaws.com/trackerdata/201402_babs_open_data.zip
+* Extract the datasets to the datasets directory
 
 # Mongo, mon!
 * Get mongo
