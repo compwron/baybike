@@ -11,4 +11,9 @@ class BikeLevel
     #" #{bike_count}"
     "[#{date_time} | #{bike_count}]"
   end
+
+  def == other
+    date_time == other.date_time &&
+        bike_count == other.bike_count
+  end
 end

@@ -11,6 +11,11 @@ class StationHistory
   end
 
   def to_s
-     "[#{station_id} | #{bike_levels}]"
+    "[#{station_id} | #{bike_levels}]"
+  end
+
+  def == other
+    @station_id == other.station_id &&
+        @bike_levels == other.bike_levels
   end
 end

@@ -15,7 +15,6 @@ class StationHistories
     date_time = date_time_from(line)
 
     if (@station_histories[station_id].nil?) then
-      puts "here #{station_id} #{date_time} #{bikes_available}"
       @station_histories[station_id] = StationHistory.new(station_id, [BikeLevel.new(date_time, bikes_available)])
     end
     if (@station_histories[station_id].bike_levels.last.bike_count != bikes_available) then
