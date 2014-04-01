@@ -4,7 +4,6 @@ class StationHistories
 
   attr_reader :station_histories
 
-
   def initialize
     @station_histories = []
   end
@@ -14,14 +13,28 @@ class StationHistories
     bikes_available = bikes_available(line)
     date_time = date_time_from(line)
 
-    if (@station_histories[station_id].nil?) then
-      @station_histories[station_id] = StationHistory.new(station_id, [BikeLevel.new(date_time, bikes_available)])
+    if (!contains_station(station_id)) then
+      @station_histories << StationHistory.new(station_id, [BikeLevel.new(date_time, bikes_available)])
     end
-    if (@station_histories[station_id].bike_levels.last.bike_count != bikes_available) then
-      puts "zomg"
-      @station_histories[station_id].add_bike_level(BikeLevel.new(date_time, bikes_available))
+
+    if (station_with(station_id).bike_levels.last.bike_count != bikes_available) then
+      station_with(station_id).add_bike_level(BikeLevel.new(date_time, bikes_available))
     end
     @station_histories.compact!
+  end
+
+  def station_with(station_id)
+    find_by_id(station_id).first
+  end
+
+  def find_by_id(station_id)
+    @station_histories.select{|station_history|
+      station_history.station_id == station_id
+    }
+  end
+
+  def contains_station(station_id)
+    !find_by_id(station_id).empty?
   end
 
   def date_time_from(line)
