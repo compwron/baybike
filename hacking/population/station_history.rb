@@ -11,6 +11,6 @@ class StationHistory
   end
 
   def to_s
-
+     "[#{station_id} | #{bike_levels}]"
   end
 end

@@ -7,7 +7,8 @@ class BikeLevel
   end
 
   def to_s
-    bike_count.size * "-\n"
-    " #{bike_count}"
+    #bike_count.size * "-\n"
+    #" #{bike_count}"
+    "[#{date_time} | #{bike_count}]"
   end
 end

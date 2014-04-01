@@ -4,7 +4,6 @@ class StationHistories
 
   attr_reader :station_histories
 
-  @@station_histories_by_id = []
 
   def initialize
     @station_histories = []
@@ -15,14 +14,15 @@ class StationHistories
     bikes_available = bikes_available(line)
     date_time = date_time_from(line)
 
-
-    if (@@station_histories_by_id[station_id].nil?) then
-      @@station_histories_by_id[station_id] = StationHistory.new(station_id, [BikeLevel.new(date_time, bikes_available)])
-    else
-      if (@@station_histories_by_id[station_id].bike_levels.last.bike_count != bikes_available) then
-        @@station_histories_by_id[station_id].add_bike_level(BikeLevel.new(date_time, bikes_available))
-      end
+    if (@station_histories[station_id].nil?) then
+      puts "here #{station_id} #{date_time} #{bikes_available}"
+      @station_histories[station_id] = StationHistory.new(station_id, [BikeLevel.new(date_time, bikes_available)])
     end
+    if (@station_histories[station_id].bike_levels.last.bike_count != bikes_available) then
+      puts "zomg"
+      @station_histories[station_id].add_bike_level(BikeLevel.new(date_time, bikes_available))
+    end
+    @station_histories.compact!
   end
 
   def date_time_from(line)
@@ -31,11 +31,11 @@ class StationHistories
   end
 
   def bikes_available(line)
-    line.split(',')[1].to_i
+    line.split(',')[1].gsub('"', '').to_i
   end
 
   def station_id_from(line)
-    line.split(',')[0].to_i
+    line.split(',')[0].gsub('"', '').to_i
   end
 
 end
