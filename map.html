@@ -30,7 +30,7 @@
 
 		$.get('results.csv', function(data) {
 			var routes = $.csv.toObjects(data);
-			$.each(route, function(i, routes) {
+			$.each(routes, function(i, route) {
 				L.mapbox.featureLayer({
 					type: 'Feature',
 					geometry: {
