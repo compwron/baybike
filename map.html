@@ -43,6 +43,7 @@
 					}
 				}).addTo(map);
 				L.mapbox.featureLayer({
+					type: 'Feature',
 					geometry: {
 						type: 'Point',
 						coordinates: [route.end_long,route.end_lat]
