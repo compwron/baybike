@@ -31,6 +31,8 @@
 		$.get('results.csv', function(data) {
 			var routes = $.csv.toObjects(data);
 			$.each(routes, function(i, route) {
+				var startLatLng = L.latLng(route.start_lat,route.start_long);
+				var endLatLng = L.latLng(route.end_lat,route.end_long);
 				L.mapbox.featureLayer({
 					type: 'Feature',
 					geometry: {
@@ -53,6 +55,7 @@
 						'marker-color': '#f86767'
 					}
 				}).addTo(map);
+				L.polyline([startLatLng, endLatLng], {color: '#f5c272'}).addTo(map);
 			})
 		})
 	</script>
