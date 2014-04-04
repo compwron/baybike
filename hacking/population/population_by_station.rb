@@ -49,19 +49,53 @@ display = Display.new(max_bikes_at_station, station_count)
 
 # need to go by timestamp, not order in db. use mongo? or sort file?
 
-stations = File.open(rebalancing).each_with_index { |line, index|
-  unless index == 0
-    current_timestamp = date_time_from(line)
-    station_histories.add(line)
+# load rebalancing into mongo
 
-    display.apply(bikes_available(line), station_id_from(line))
+def import_rebalancing
+  dbname = 'baybike'
+  collection_name = 'rebalancing'
+  `mongo #{dbname} --eval "db.dropDatabase()"`
+  command = "mongoimport -d #{dbname} -c #{collection_name} --type csv --file #{rebalancing} --headerline"
+  `#{command}`
+end
 
-    clear_screen
-    puts display
-  end
+# import_rebalancing()
+
+# for loop from first timestamp in file (to last timestamp in file?)
+lines = IO.readlines(rebalancing)
+
+def timestamp_from(line)
+  line.split(',')[3].gsub('"', '').gsub("\n", '')
+end
+
+date_chunk = timestamp_from(lines[1])
+first_timestamp = DateTime.strptime(date_chunk, '%Y/%m/%d %H:%M:%S')
+puts "First timestamp is: #{first_timestamp}"
+
+# print mongo query result for timestamp to screen
+require 'mongo'
+include Mongo
+
+client = MongoClient.new 
+db = client['baybike']
+collection = db.collection('rebalancing')
+item = collection.find( :station_id => 2 ).first
+p item
 
 
-}
+# stations = File.open(rebalancing).each_with_index { |line, index|
+#   unless index == 0
+#     current_timestamp = date_time_from(line)
+#     station_histories.add(line)
+
+#     display.apply(bikes_available(line), station_id_from(line))
+
+#     clear_screen
+#     puts display
+#   end
+
+
+# }
 
 
 
