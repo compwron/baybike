@@ -1,5 +1,5 @@
 # Bay Area Bike Share Open Data Challenge
-
+* Live JSON feed http://www.bayareabikeshare.com/stations/json
 * Poking around with the data set from https://bayareabikeshare.com/datachallenge
 * Download it here https://s3.amazonaws.com/trackerdata/201402_babs_open_data.zip
 * Extract the datasets to the datasets directory
@@ -32,6 +32,18 @@ mongo
 use baybike
 db.trips.find().pretty()
 ```
+
+# Extrapolation Stories/Mash-ups
+* Predict bike availability during a certain time window
+* How much money does the city save by having people ride these bikes?
+* CO2 saved with reduced public transit/driving
+* Track a subscriber/bike and map its routes with street view
+* Bike couples. Find bikes rented at approx the same time at the same place. What bikes end up at the same racks?
+* Top 10 restaurants - What restaurants are benefitting from bike share?
+* Most bike share friendly/green SF neighborhoods
+  * Get more information about subscriber profiles - zip code, neighborhood, property values, median income
+* Compare east coast vs west coast bike shares
+
 # Questions we have about the data
 
 ## Currently in progress:
@@ -84,7 +96,6 @@ Count: 	 609 	 Start: Steuart at Market 	 End: 2nd at Townsend
 ```
 
 ## To Do:
-
 * average lifetime of bikes
 * spread of most-used and least-used bikes
 * longest checked out bike
@@ -98,6 +109,5 @@ Count: 	 609 	 Start: Steuart at Market 	 End: 2nd at Townsend
 * At what temperature are the most bike trips taken
 * most-used station, least-used station
 * who does longer rides? subscriber or non-subscriber?
-* most frequent subscriber routes
 * detect non-routine routes by subscribers
 * derive user id buckets from data (creeeeepy) - they already have this data, why derive it
