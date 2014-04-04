@@ -23,8 +23,8 @@ class Trip
     end
 
     def is_coupled_to(other)
-        difference = abs_time_delta( start_time, other.start_time ) + abs_time_delta( end_time, other.end_time )
-        difference < (10*60) # 10 mins
+        (abs_time_delta( start_time, other.start_time ) < 3) && 
+            (abs_time_delta( end_time, other.end_time ) < 3)
     end
 
     def to_s
