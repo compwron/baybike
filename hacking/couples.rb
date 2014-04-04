@@ -31,12 +31,15 @@ class Trip
         "[#{start_station},#{end_station}] (#{bike}) #{start_time} => #{end_time}     #{zip}"
     end
 
+    def on_day(date)
+        start_time.to_date == DateTime.parse(date, '%m/%d/%Y')
+    end
+
     private
     def abs_time_delta(a,b)
         (a.to_time.to_i - b.to_time.to_i).abs
     end
 end
-
 all_the_trips = File.open(trips).drop(1).map{ |line|
     Trip.new(line.split(","))
 }
