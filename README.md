@@ -111,3 +111,4 @@ Count: 	 609 	 Start: Steuart at Market 	 End: 2nd at Townsend
 * who does longer rides? subscriber or non-subscriber?
 * detect non-routine routes by subscribers
 * derive user id buckets from data (creeeeepy) - they already have this data, why derive it
+* first rental of the day at each station per day
