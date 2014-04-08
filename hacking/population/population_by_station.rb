@@ -47,8 +47,8 @@ end
 
 station_histories = StationHistories.new()
 #at timestamp x, update existing map with data
-max_bikes_at_station = 12
-station_count = 87
+max_bikes_at_station = 27
+station_count = 83
 display = Display.new(max_bikes_at_station, station_count)
 
 # need to go by timestamp, not order in db. use mongo? or sort file?
@@ -84,35 +84,28 @@ client = MongoClient.new
 db = client['baybike']
 collection = db.collection('rebalancing')
 
-def display_stuff(current_timestamp, last_timestamp, collection)
+def display_stuff(current_timestamp, last_timestamp, collection, display)
   if current_timestamp < last_timestamp then
     current_timestamp_to_minute = current_timestamp.strftime('%Y/%m/%d %H:%M')
     current_data = collection.find('time' => /#{current_timestamp_to_minute}/).to_a
-    puts "found #{current_data.size} for time: #{current_timestamp_to_minute}"
+    # puts "found #{current_data.size} for time: #{current_timestamp_to_minute}"
     current_data.each {|mongo_line|
-      p mongo_line
-      # display.apply()
-      # clear_screen
-      # puts display
+      # p mongo_line
+
+      bikes_available = mongo_line['bikes_available']
+      station_id = mongo_line['station_id']
+      display.apply(bikes_available, station_id)
+      clear_screen
+      puts display
     }
-    display_stuff(current_timestamp + 1.minute, last_timestamp, collection)
+    display_stuff(current_timestamp + 1.minute, last_timestamp, collection, display)
   end
 end
 
-display_stuff(first_timestamp, last_timestamp, collection)
-# stations = File.open(rebalancing).each_with_index { |line, index|
-#   unless index == 0
-#     current_timestamp = date_time_from(line)
-#     station_histories.add(line)
+display_stuff(first_timestamp, last_timestamp, collection, display)
 
-#     display.apply(bikes_available(line), station_id_from(line))
-
-#     clear_screen
-#     puts display
-#   end
-
-
-# }
+# TODO: initialize display with earliest-found number of bikes so that they don't appear one by one awkwardly. 
+# Also reduce pause beteen updating display for new data
 
 
 
