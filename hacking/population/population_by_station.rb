@@ -84,19 +84,22 @@ client = MongoClient.new
 db = client['baybike']
 collection = db.collection('rebalancing')
 
+def display_stuff(current_timestamp, last_timestamp, collection)
+  if current_timestamp < last_timestamp then
+    current_timestamp_to_minute = current_timestamp.strftime('%Y/%m/%d %H:%M')
+    current_data = collection.find('time' => /#{current_timestamp_to_minute}/).to_a
+    puts "found #{current_data.size} for time: #{current_timestamp_to_minute}"
+    current_data.each {|mongo_line|
+      p mongo_line
+      # display.apply()
+      # clear_screen
+      # puts display
+    }
+    display_stuff(current_timestamp + 1.minute, last_timestamp, collection)
+  end
+end
 
-current_timestamp = first_timestamp
-
-# 2013/08/29 17:34:01
-current_timestamp_to_minute = current_timestamp.strftime('%Y/%m/%d %H:%M')
-
-current_timestamp_plus_minute = current_timestamp + 1.minute
-
-p collection.find.first
-# either import as date, or use string-include
-p collection.find('time' => /#{current_timestamp_to_minute}/).to_a
-
-
+display_stuff(first_timestamp, last_timestamp, collection)
 # stations = File.open(rebalancing).each_with_index { |line, index|
 #   unless index == 0
 #     current_timestamp = date_time_from(line)
