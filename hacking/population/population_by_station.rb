@@ -15,6 +15,10 @@ require_relative 'display'
 # "83","8","7","2014/02/28 22:20:02"
 
 require 'date'
+require 'time'
+require 'mongo'
+include Mongo
+require 'active_support/core_ext/numeric' # Mostly I just want to play with this, and 1.minute is cool. 
 
 # station has timestamp-count map. only add new item to map when count changes? OR take daily timestamp data... every half hour?
 
@@ -69,18 +73,30 @@ def timestamp_from(line)
 end
 
 date_chunk = timestamp_from(lines[1])
-first_timestamp = DateTime.strptime(date_chunk, '%Y/%m/%d %H:%M:%S')
+first_timestamp = Time.strptime(date_chunk, '%Y/%m/%d %H:%M:%S')
 puts "First timestamp is: #{first_timestamp}"
 
 # print mongo query result for timestamp to screen
-require 'mongo'
-include Mongo
+
 
 client = MongoClient.new 
 db = client['baybike']
 collection = db.collection('rebalancing')
-item = collection.find( :station_id => 2 ).first
-p item
+
+# def for_db(date)
+#   date.strftime('%Y/%m/%d %H:%M:%S')
+# end
+
+current_timestamp = first_timestamp
+
+# 2013/08/29 17:34:01
+current_timestamp_to_minute = current_timestamp.strftime('%Y/%m/%d %H:%M')
+
+current_timestamp_plus_minute = current_timestamp + 1.minute
+
+p collection.find.first
+# either import as date, or use string-include
+p collection.find('time' => /#{current_timestamp_to_minute}/).to_a
 
 
 # stations = File.open(rebalancing).each_with_index { |line, index|

@@ -2,3 +2,5 @@ source 'https://rubygems.org'
 gem 'rspec'
 gem 'mongo'
 gem 'bson_ext' # performance improvement for mongo gem
+gem 'activesupport'
+gem 'minitest' # needed for activesupport
