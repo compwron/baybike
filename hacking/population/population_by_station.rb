@@ -68,24 +68,22 @@ end
 # for loop from first timestamp in file (to last timestamp in file?)
 lines = IO.readlines(rebalancing)
 
-def timestamp_from(line)
+def raw_timestamp_from(line)
   line.split(',')[3].gsub('"', '').gsub("\n", '')
 end
 
-date_chunk = timestamp_from(lines[1])
-first_timestamp = Time.strptime(date_chunk, '%Y/%m/%d %H:%M:%S')
-puts "First timestamp is: #{first_timestamp}"
+def timestamp_from(line)
+  Time.strptime(raw_timestamp_from(line), '%Y/%m/%d %H:%M:%S')
+end
 
-# print mongo query result for timestamp to screen
-
+first_timestamp = timestamp_from(lines[1])
+last_timestamp = timestamp_from(lines[lines.size - 1])
+puts "first timestamp: #{first_timestamp} ------- last timestamp: #{last_timestamp}"
 
 client = MongoClient.new 
 db = client['baybike']
 collection = db.collection('rebalancing')
 
-# def for_db(date)
-#   date.strftime('%Y/%m/%d %H:%M:%S')
-# end
 
 current_timestamp = first_timestamp
 
